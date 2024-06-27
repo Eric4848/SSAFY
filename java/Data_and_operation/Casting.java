@@ -5,6 +5,7 @@ public class Casting {
 		
 		double a = 1.1;
 		double b = 1;
+		double b2 = (double) 1;
 		System.out.println(b);
 		
 		// int c = 1.1; // int에 double형 저장 불가능
