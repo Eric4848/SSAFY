@@ -17,7 +17,7 @@ public class swea1983 {
 				int tmp = 0;
 				tmp += sc.nextInt() * 35;
 				tmp += sc.nextInt() * 45;
-				tmp += sc.nextInt() * 10;
+				tmp += sc.nextInt() * 20;
 				scores[i] = tmp;
 				if(i+1 == K) {
 					target = tmp;
