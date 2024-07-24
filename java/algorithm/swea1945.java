@@ -18,12 +18,12 @@ public class swea1945 {
 					cnts[i] += 1;
 				}
 			}
-//			System.out.print("#" + tc);
-//			for(int cnt : cnts) {
-//				System.out.print(" " + cnt);
-//			}
-//			System.out.println();
-			System.out.print("#" + tc + " " + Arrays.toString(cnts));
+			System.out.print("#" + tc);
+			for(int cnt : cnts) {
+				System.out.print(" " + cnt);
+			}
+			System.out.println();
+//			System.out.print("#" + tc + " " + Arrays.toString(cnts));
 		}
 	}
 }
