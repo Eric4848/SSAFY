@@ -24,18 +24,12 @@ public class swea14510 {
 				two += diff / 2;
 				one += diff % 2;
 			}
-//			System.out.println(one + ", " + two);
 			while(one + 1 < two) {
 				one += 2;
 				two -= 1;
 			}
-//			if(one -  two >= 2) {
-//				one -= 2;
-//				two += 1;
-//			}
 			int answer = two * 2;
 			if(two < one) answer = one * 2 - 1;
-//			System.out.println(one + ", " + two);
 			System.out.println("#" +  tc + " " + answer);
 		}
 	}
