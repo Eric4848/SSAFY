@@ -51,7 +51,7 @@ public class debug {
     }
 
     public static void postorder(int root) {
-        if (trees.length < root || trees[root].left == null || trees[root].right == null) {
+        if (trees.length < root || trees[root].left == null || trees[root].right == null) {	// 맨 앞 범위제한 오류였
             return; 
         }
 //        System.out.println(root);
