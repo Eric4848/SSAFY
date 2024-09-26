@@ -7,13 +7,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-//class loc {
-//	int r, c;
-//	loc(int r, int c) {
-//		this.r = r;
-//		this.c = c;
-//	}
-//}
+class loc {
+	int r, c;
+	loc(int r, int c) {
+		this.r = r;
+		this.c = c;
+	}
+}
 
 public class bj2468 {
 	public static void main(String[] args) throws IOException {

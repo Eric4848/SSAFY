@@ -3,14 +3,14 @@ package baekjoon;
 import java.io.*;
 import java.util.*;
 
-class loc {
-	int r, c, destroy;
-	loc(int r, int c, int destroy) {
-		this.r = r;
-		this.c = c;
-		this.destroy = destroy;
-	}
-}
+//class loc {
+//	int r, c, destroy;
+//	loc(int r, int c, int destroy) {
+//		this.r = r;
+//		this.c = c;
+//		this.destroy = destroy;
+//	}
+//}
 
 public class bj2206 {
 	public static void main(String[] args) throws IOException {
