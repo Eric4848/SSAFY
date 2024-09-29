@@ -3,6 +3,11 @@ package baekjoon;
 import java.io.*;
 import java.util.*;
 
+// 두 단계로 해야됨
+
+// 1. 두 구역으로 분리 -> 조합
+// 2. 분리된 구역이 맞는지 확인 -> bfs
+
 public class bj17471 {
 	static int N, answer;
 	static int[] populations;
@@ -29,6 +34,7 @@ public class bj17471 {
 				links[i].add(Integer.parseInt(st.nextToken()));
 			}
 		}
+		
 		answer = Integer.MAX_VALUE;
 		comb(1);
 		if(answer == Integer.MAX_VALUE) 
