@@ -14,9 +14,22 @@ public class bj2170 {
 			pq.add(new int[] {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())});
 		}
 		
+		int[] tmp = pq.poll();
+		int h = tmp[0];
+		int t = tmp[1];
+		int sum = 0;
+		
 		while(!pq.isEmpty()) {
 			int[] now = pq.poll();
-			System.out.println(now[0]);
+			if(t < now[0]) {
+				sum += t - h;
+				h = now[0];
+				t = now[1];
+			} else {
+				t = Math.max(t, now[1]);
+			}
 		}
+		
+		System.out.println(t - h + sum);
 	}
 }
