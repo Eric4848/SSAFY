@@ -1,4 +1,4 @@
-package 송이하홍;
+package 강송이하홍;
 
 import java.util.Scanner;
 
