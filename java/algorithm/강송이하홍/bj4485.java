@@ -35,7 +35,7 @@ public class bj4485 {
 			int answer = 0;
 			dijkstra[0][0] = caves[0][0];
 			PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> {return o1[0] - o2[0];});
-			pq.add(new int[] {dijkstra[0][0], 0, 0});
+			pq.offer(new int[] {dijkstra[0][0], 0, 0});
 			while(!pq.isEmpty()) {
 				int[] curr = pq.poll();
 				int dist = curr[0];
