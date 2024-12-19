@@ -25,7 +25,7 @@ public class bj2668 {
 			dfs(i, i);
 			selected[i] = false;
 		}
-		Collections.sort(answers);
+//		Collections.sort(answers);
 		System.out.println(answers.size());
 		for(int answer : answers) {
 			System.out.println(answer);
