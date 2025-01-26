@@ -5,10 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class bj1753 {
@@ -53,26 +51,6 @@ public class bj1753 {
 				}
 			}
 		}
-		
-//		Queue<int[]> q = new LinkedList<int[]>();
-//		dists[K] = 0;
-//		q.add(new int[] {K, 0});
-//		while(!q.isEmpty()) {
-//			int[] curr = q.poll();
-//			int now = curr[0];
-//			int dist = curr[1];
-//			
-//			if(dists[now] < dist) continue;
-//			
-//			for(int[] edge : edges[now]) {
-//				int nxt = edge[0];
-//				int d = edge[1];
-//				if(dist + d < dists[nxt]) {
-//					dists[nxt] = dist + d;
-//					q.add(new int[] {nxt, dists[nxt]});
-//				}
-//			}
-//		}
 		
 		for(int i = 1; i <= V; i++) {
 			if(dists[i] == Integer.MAX_VALUE) System.out.println("INF");
