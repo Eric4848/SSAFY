@@ -55,12 +55,12 @@ public class bj1774 {
 		
 		boolean[] visited = new boolean[N+1];
 		visited[0] = true;
-		float answer = 0f;
+		Double answer = 0.0;
 		PriorityQueue<link> pq = new PriorityQueue<>();
 		pq.add(new link(1, 0.0));
 		while(!pq.isEmpty()) {
 			link curr = pq.poll();
-			if(visited[curr.now])continue;
+			if(visited[curr.now]) continue;
 			visited[curr.now] = true;
 			answer += curr.total;
 			for(int nxt = 1; nxt <= N; nxt++) {
