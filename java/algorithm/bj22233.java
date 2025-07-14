@@ -28,7 +28,6 @@ public class bj22233 {
 	}
 }
 
-
 //public class bj22233 {
 //	public static void main(String[] args) throws IOException {
 //		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
