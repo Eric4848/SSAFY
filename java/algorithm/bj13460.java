@@ -43,7 +43,7 @@ public class bj13460 {
 		
 		while(!q.isEmpty()) {
 			Beed curr = q.poll();
-			if(curr.move == 9) {
+			if(curr.move == 10) {
 				System.out.println(-1);
 				break;
 			}
@@ -53,35 +53,37 @@ public class bj13460 {
 			int[] blue = new int[] {curr.blue[0], curr.blue[1]};
 			boolean red_out = false;
 			boolean blue_out = false;
-//			System.out.println("----------------------");
-//			for(int r = 0; r < N; r++) {
-//				for(int c = 0; c < M; c++) {
-//					System.out.print(boards[r][c]);
-//				}
-//				System.out.println();
-//			}
 			
+			System.out.println("----------------------");
+			for(int r = 0; r < N; r++) {
+				for(int c = 0; c < M; c++) {
+					System.out.print(boards[r][c]);
+				}
+				System.out.println();
+			}
 			for(int r = 0; r < N; r++) {
 				for(int c = 0; c < M; c++) {
 					if(boards[r][c] == 'R') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, -1, 0);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] rd = move(r, c, -1, 0);
+						if(boards[rd[0]][rd[1]] == 'O') {
 							red_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						red = d;
+						boards[rd[0]][rd[1]] = 'R';
+						red = rd;
+//						System.out.println("r1");
 					}
 					if(boards[r][c] == 'B') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, -1, 0);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] bd = move(r, c, -1, 0);
+						if(boards[bd[0]][bd[1]] == 'O') {
 							blue_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						blue = d;
+						boards[bd[0]][bd[1]] = 'B';
+						blue = bd;
+//						System.out.println("b1");
 					}
 				}
 			}
@@ -99,29 +101,31 @@ public class bj13460 {
 			
 			boards[red[0]][red[1]] = '.';
 			boards[blue[0]][blue[1]] = '.';
+			boards[curr.red[0]][curr.red[1]] = 'R';
+			boards[curr.blue[0]][curr.blue[1]] = 'B';
 			red_out = false;
 			blue_out = false;
 			for(int r = N-1; 0 <= r; r--) {
 				for(int c = 0; c < M; c++) {
 					if(boards[r][c] == 'R') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, 1, 0);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] rd = move(r, c, 1, 0);
+						if(boards[rd[0]][rd[1]] == 'O') {
 							red_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						red = d;
+						boards[rd[0]][rd[1]] = 'R';
+						red = rd;
 					}
 					if(boards[r][c] == 'B') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, 1, 0);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] bd = move(r, c, 1, 0);
+						if(boards[bd[0]][bd[1]] == 'O') {
 							blue_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						blue = d;
+						boards[bd[0]][bd[1]] = 'B';
+						blue = bd;
 					}
 				}
 			}
@@ -141,29 +145,31 @@ public class bj13460 {
 			
 			boards[red[0]][red[1]] = '.';
 			boards[blue[0]][blue[1]] = '.';
+			boards[curr.red[0]][curr.red[1]] = 'R';
+			boards[curr.blue[0]][curr.blue[1]] = 'B';
 			red_out = false;
 			blue_out = false;
 			for(int c = 0; c < M; c++) {
 				for(int r = 0; r < N; r++) {
 					if(boards[r][c] == 'R') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, 0, 1);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] rd = move(r, c, 0, 1);
+						if(boards[rd[0]][rd[1]] == 'O') {
 							red_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						red = d;
+						boards[rd[0]][rd[1]] = 'R';
+						red = rd;
 					}
 					if(boards[r][c] == 'B') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, 0, 1);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] bd = move(r, c, 0, 1);
+						if(boards[bd[0]][bd[1]] == 'O') {
 							blue_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						blue = d;
+						boards[bd[0]][bd[1]] = 'B';
+						blue = bd;
 					}
 				}
 			}
@@ -182,32 +188,37 @@ public class bj13460 {
 			
 			boards[red[0]][red[1]] = '.';
 			boards[blue[0]][blue[1]] = '.';
+			boards[curr.red[0]][curr.red[1]] = 'R';
+			boards[curr.blue[0]][curr.blue[1]] = 'B';
 			red_out = false;
 			blue_out = false;
 			for(int c = M-1; 0 <= c; c--) {
 				for(int r = 0; r < N; r++) {
 					if(boards[r][c] == 'R') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, 0, 1);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] rd = move(r, c, 0, -1);
+						if(boards[rd[0]][rd[1]] == 'O') {
 							red_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						red = d;
+						boards[rd[0]][rd[1]] = 'R';
+						red = rd;
 					}
 					if(boards[r][c] == 'B') {
 						boards[r][c] = '.';
-						int[] d = move(r, c, 0, 1);
-						if(boards[d[0]][d[1]] == 'O') {
+						int[] bd = move(r, c, 0, -1);
+						if(boards[bd[0]][bd[1]] == 'O') {
 							blue_out = true;
-							break;
+							continue;
 						}
-						boards[d[0]][d[1]] = 'R';
-						blue = d;
+						boards[bd[0]][bd[1]] = 'B';
+						blue = bd;
 					}
 				}
 			}
+			
+			boards[red[0]][red[1]] = '.';
+			boards[blue[0]][blue[1]] = '.';
 			if(!blue_out) {
 				if(red_out) {
 					System.out.println(curr.move+1);
@@ -223,10 +234,12 @@ public class bj13460 {
 	}
 	
 	static int[] move(int r, int c, int dr, int dc) {
-		while(boards[r+dr][c+dc] == '.') {
-			r += dr;
-			c += dc;
+		int nr = r;
+		int nc = c;
+		while(boards[nr+dr][nc+dc] != '#' && boards[nr+dr][nc+dc] != 'R' && boards[nr+dr][nc+dc] != 'B') {
+			nr += dr;
+			nc += dc;
 		}
-		return new int[] {r, c};
+		return new int[] {nr, nc};
 	}
 }
