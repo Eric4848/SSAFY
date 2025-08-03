@@ -42,13 +42,10 @@ public class bj17837 {
 		}
 		
 		bp: while(turn <= 1000) {
-//			System.out.println(turn);
-			f: for(int i = 0; i < K; i++) {
-//				System.out.println(stacks[1][2]);
+			for(int i = 0; i < K; i++) {
 				int r = pieces[i][0];
 				int c = pieces[i][1];
 				int d = pieces[i][2];
-//				System.out.println(i + ", " + r + ", " + c + ", " + d);
 				int nr = r + dr[d];
 				int nc = c + dc[d];
 				
@@ -108,7 +105,6 @@ public class bj17837 {
 						else
 							curr.add(num);
 					}
-//					System.out.println(tmp);
 					while(!tmp.isEmpty()) {
 						int moved = tmp.pop();
 						pieces[moved][0] = nr;
@@ -120,8 +116,6 @@ public class bj17837 {
 				}
 				
 				if(boards[nr][nc] == 2) {
-					boolean target = false;
-					int l = stacks[r][c].size();
 					switch (d) {
 						case 0:
 							d = 1;
@@ -144,24 +138,54 @@ public class bj17837 {
 						nc = c;
 					}
 					if(boards[nr][nc] == 2) {
-						continue f;
+						continue;
 					}
-					Queue<Integer> curr = stacks[r][c];
-					Queue<Integer> tmp = new LinkedList<>();
-					for(int j = 0; j < l; j++) {
-						int num = curr.poll();
-						if(num == i) 
-							target = true;
-						if(target)
-							tmp.add(num);
-						else
-							curr.add(num);
+					if(boards[nr][nc] == 0) {
+						boolean target = false;
+						int l = stacks[r][c].size();
+						Queue<Integer> curr = stacks[r][c];
+						Queue<Integer> tmp = new LinkedList<>();
+						for(int j = 0; j < l; j++) {
+							int num = curr.poll();
+							if(num == i) 
+								target = true;
+							if(target)
+								tmp.add(num);
+							else
+								curr.add(num);
+						}
+						while(!tmp.isEmpty()) {
+							int moved = tmp.poll();
+							pieces[moved][0] = nr;
+							pieces[moved][1] = nc;
+							stacks[nr][nc].add(moved);
+						}
+						if(3 < stacks[nr][nc].size())
+							break bp;
 					}
-					while(!tmp.isEmpty()) {
-						int moved = tmp.poll();
-						pieces[moved][0] = nr;
-						pieces[moved][1] = nc;
-						stacks[nr][nc].add(moved);
+					
+					if(boards[nr][nc] == 1) {
+						boolean target = false;
+						int l = stacks[r][c].size();
+						Queue<Integer> curr = stacks[r][c];
+						Stack<Integer> tmp = new Stack<>();
+						for(int j = 0; j < l; j++) {
+							int num = curr.poll();
+							if(num == i) 
+								target = true;
+							if(target)
+								tmp.add(num);
+							else
+								curr.add(num);
+						}
+						while(!tmp.isEmpty()) {
+							int moved = tmp.pop();
+							pieces[moved][0] = nr;
+							pieces[moved][1] = nc;
+							stacks[nr][nc].add(moved);
+						}
+						if(3 < stacks[nr][nc].size())
+							break bp;
 					}
 					if(3 < stacks[nr][nc].size())
 						break bp;
