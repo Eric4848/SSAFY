@@ -34,10 +34,6 @@ public class bj3758 {
 				}
 			}
 			
-			for(int i = 1; i <= n; i++) {
-				System.out.println(totals[i] + ", " + submits[i] + ", " + times[i]);
-			}
-			
 			int rank = 1;
 			for(int i = 1; i <= n; i++) {
 				if(i == t) continue;
