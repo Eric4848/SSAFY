@@ -50,12 +50,6 @@ public class bj20125 {
 				break;
 			RL++;
 		}
-//		for(int r = 0; r < N; r++) {
-//			for(int c = 0; c < N; c++) {
-//				System.out.print(cookies[r][c]);
-//			}
-//			System.out.println();
-//		}
 		R += 2;
 		C += 1;
 		System.out.println(R + " " + C);
