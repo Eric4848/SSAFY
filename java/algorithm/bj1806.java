@@ -29,12 +29,12 @@ public class bj1806 {
 		}
 		
 		int answer = ++tail;
-		while(tail < N) {
+		while(head < tail) {
 			if(S < total) {
 				total -= nums[head++];
 			}
 			else {
-//				if(tail == N) break;
+				if(tail == N) break;
 				total += nums[tail++];
 			}
 			if(S <= total)
