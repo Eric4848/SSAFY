@@ -34,6 +34,6 @@ public class bj2179 {
 				break;
 			len++;
 		}
-		return len;
+		return len;   
 	}
 }
