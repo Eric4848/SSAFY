@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 public class bj17780 {
 	static int N, K;
 	static int[][] maps;
+	static int[][] pieces;
 	static Queue<Integer>[][] chess;
 	static int[] dr = {0, 0, 0, -1, 1};
 	static int[] dc = {0, 1, -1, 0, 0};
@@ -18,6 +19,7 @@ public class bj17780 {
 		N = Integer.parseInt(st.nextToken());
 		K = Integer.parseInt(st.nextToken());
 		maps = new int[N][N];
+		pieces = new int[K][3];
 		chess = new LinkedList[N][N];
 		for(int r = 0; r < N; r++) {
 			st = new StringTokenizer(br.readLine());
@@ -27,26 +29,26 @@ public class bj17780 {
 			}
 		}
 		
-		Queue<int[]> q = new LinkedList<int[]>();
 		for(int i = 0; i < K; i++) {
 			st = new StringTokenizer(br.readLine());
 			int r = Integer.parseInt(st.nextToken())-1;
 			int c = Integer.parseInt(st.nextToken())-1;
 			int d = Integer.parseInt(st.nextToken());
-			q.add(new int[] {r, c, d});
 			chess[r][c].add(i);
+			pieces[i][0] = r;
+			pieces[i][1] = c;
+			pieces[i][2] = d;
 		}
 		
 		int answer = 1;
 		while(answer <= 1000) {
 			for(int i = 0; i < K; i++) {
-				int[] curr = q.poll();
+				int[] curr = pieces[i];
 				int r = curr[0];
 				int c = curr[1];
 				int d = curr[2];
 				int result = -1;
 				if(chess[r][c].isEmpty() || chess[r][c].peek() != i) {
-					q.add(curr);
 					continue;
 				}
 				
@@ -59,8 +61,8 @@ public class bj17780 {
 						d--;
 					nr = r + dr[d];
 					nc = c + dc[d];
+					pieces[i][2] = d;
 					if(nr < 0 || N <= nr || nc < 0 || N <= nc || maps[nr][nc] == 2) {
-						q.add(new int[] {nr, nc, d});
 						continue;
 					}
 				}
@@ -70,8 +72,6 @@ public class bj17780 {
 					System.out.println(answer);
 					return;
 				}
-				
-				q.add(new int[] {nr, nc, d});
 			}
 			answer++;
 		}
@@ -91,7 +91,10 @@ public class bj17780 {
 		}
 		
 		while(!chess[fr][fc].isEmpty()) {
-			chess[tr][tc].add(chess[fr][fc].poll());
+			int piece = chess[fr][fc].poll();
+			chess[tr][tc].add(piece);
+			pieces[piece][0] = tr;
+			pieces[piece][1] = tc;
 		}
 		
 		return chess[tr][tc].size();
