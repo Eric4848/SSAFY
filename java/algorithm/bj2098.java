@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class bj2098 {
-	static int N, answer;
-	static int max = 16000000;
+	static int N;
+	static int max = 16000000;	// 오버플로우 방지를 위해 가능한 최댓값 계산
 	static int[][] W, dp;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
