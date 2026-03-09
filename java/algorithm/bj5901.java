@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
@@ -10,6 +11,8 @@ public class bj5901 {
 	static int[] markets, orders;
 	static boolean[] ismarket, visit;
 	static int[][] dists;
+	static ArrayList<int[]>[] graphs;
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -22,50 +25,51 @@ public class bj5901 {
 		visit = new boolean[K];
 		orders = new int[K];
 		answer = Integer.MAX_VALUE;
+		
 		for(int i = 0; i < K; i++) {
 			 int city = Integer.parseInt(br.readLine()) - 1;
 			 ismarket[city] = true;
 			 markets[i] = city;
 		}
 		
-		dists = new int[N][N];
-		for(int r = 0; r < N; r++) {
-			Arrays.fill(dists[r], 10000);
+		dists = new int[K][N];
+		graphs = new ArrayList[N];
+		for(int i = 0; i < N; i++) {
+			graphs[i] = new ArrayList<int[]>();
 		}
+		
+//		for(int r = 0; r < N; r++) {
+//			Arrays.fill(dists[r], 10000);
+//		}
+//		
 		for(int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken()) - 1;
 			int b = Integer.parseInt(st.nextToken()) - 1;
 			int dist = Integer.parseInt(st.nextToken());
-			dists[a][b] = dist;
-			dists[b][a] = dist;
-		}
-		
-		for(int k = 0; k < N; k++) {
-			for(int i = 0; i < N; i++) {
-				for(int j = i+1; j < N; j++) {
-					if(dists[i][k] + dists[k][j] < dists[i][j]) {
-						dists[i][j] = dists[i][k] + dists[k][j];
-						dists[j][i] = dists[i][j];
-					}
-				}
-			}
+
+			graphs[a].add(new int[] {b, dist});
+			graphs[b].add(new int[] {a, dist});
 		}
 		
 		PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> {return a[1] - b[1];});
-		for(int start = 0; start < N; start++) {
+		for(int i = 0; i < K; i++) {
+			int start = markets[i];
+			Arrays.fill(dists[i], Integer.MAX_VALUE);
 			pq.add(new int[] {start, 0});
+			dists[i][start] = 0;
 			
 			while(!pq.isEmpty()) {
 				int[] curr = pq.poll();
 				int loc = curr[0];
 				int dist = curr[1];
-				if(dists[start][loc] > dist) {
-					dists[start][loc] = dist;
-					for(int nxt = 0; nxt < N; nxt++) {
-						if(dist + dists[loc][nxt] < dists[start][nxt]) {
-							pq.add(new int[] {nxt, dist + dists[loc][nxt]});
-						}
+				if(dists[i][loc] < dist) continue;
+				for(int[] nxts : graphs[loc]) {
+					int nxt = nxts[0];
+					int nxtdist = dist + nxts[1];
+					if(nxtdist < dists[i][nxt]) {
+						dists[i][nxt] = nxtdist;
+						pq.add(new int[] {nxt, nxtdist});
 					}
 				}
 			}
@@ -79,6 +83,7 @@ public class bj5901 {
 	static void dfs(int d) {
 		if(d == K) {
 			calc();
+			return;
 		}
 		
 		for(int i = 0; i < K; i++) {
@@ -95,11 +100,11 @@ public class bj5901 {
 		int total = Integer.MAX_VALUE;
 		for(int i = 0; i < N; i++) {
 			if(ismarket[i]) continue;
-			total = Math.min(total, dists[i][orders[0]] + dists[i][orders[K-1]]);
+			total = Math.min(total, dists[orders[0]][i] + dists[orders[K-1]][i]);
 		}
 		
 		for(int i = 1; i < K; i++) {
-			total += dists[orders[i-1]][orders[i]];
+			total += dists[orders[i-1]][markets[orders[i]]];
 		}
 		
 		answer = Math.min(answer, total);
