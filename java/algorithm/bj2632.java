@@ -1,13 +1,17 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class bj2632 {
 	static int m, n;
 	static int[] apizza, bpizza;
-	static PriorityQueue<Integer> asize, bsize;
+	static Map<Integer, Integer> asize;
+	static List<Integer> bsize;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -30,26 +34,18 @@ public class bj2632 {
 			bpizza[n + i] = bp;
 		}
 		
-		asize = new PriorityQueue<Integer>();
-		bsize = new PriorityQueue<Integer>((a, b) -> {return b - a;});
+		asize = new HashMap<Integer, Integer>();
+		bsize = new ArrayList<Integer>();
 		
 		calca();
 		calcb();
 		
 		int answer = 0;
-		int curr = 0;
-		int added = 0;
-		while(!bsize.isEmpty()) {
-			curr = bsize.poll();
-			if(size < curr) continue;
-			while(!asize.isEmpty()) {
-				added = asize.poll();
-				if(size < added) break;
-				if(size < curr + added) curr = bsize.poll();
-				if(curr + added == size) {
-					answer++;
-				}
-			}
+		for(int i = 0; i < bsize.size(); i++) {
+			int bp = bsize.get(i);
+			int ap = size - bp;
+			if(asize.containsKey(ap))
+				answer += asize.get(ap);
 		}
 		System.out.println(answer);
 	}
@@ -58,8 +54,8 @@ public class bj2632 {
 		int sum = 0;
 		for(int i = 0; i < m; i++)
 			sum += apizza[i];
-		asize.add(0);
-		asize.add(sum);
+		asize.put(0, 1);
+		asize.put(sum, 1);
 		for(int l = 1; l < m; l++) {
 			int total = 0;
 			int head = 0;
@@ -67,7 +63,10 @@ public class bj2632 {
 			while(tail < l) 
 				total += apizza[tail++];
 			for(int i = 0; i < m; i++) {
-				asize.add(total);
+				if(asize.containsKey(total))
+					asize.put(total, asize.get(total) + 1);
+				else
+					asize.put(total, 1);
 				total -= apizza[head++];
 				total += apizza[tail++];
 			}
