@@ -31,10 +31,11 @@ public class bj14324 {
 			System.out.println("Case #" +tc + ": " + calc());
 		}
 	}
+	
 	static int calc() {
-		boolean iscontinue = true;
-		while(iscontinue) {
-			iscontinue = false;
+		boolean needcalc = true;
+		while(needcalc) {
+			needcalc = false;
 			for(int r = 1; r < R - 1; r++) {
 				for(int c = 1; c < C - 1; c++) {
 					int now = rains[r][c];
@@ -45,11 +46,12 @@ public class bj14324 {
 					}
 					if(now < rains[r][c]) {
 						rains[r][c] = now;
-						iscontinue = true;
+						needcalc = true;
 					}
 				}
 			}
 		}
+		
 		int total = 0;
 		for(int r = 0; r < R; r++) {
 			for(int c = 0; c < C; c++) {
@@ -57,6 +59,7 @@ public class bj14324 {
 					total += rains[r][c] - grounds[r][c];
 			}
 		}
+		
 		return total;
 	}
 }
